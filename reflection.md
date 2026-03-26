@@ -4,6 +4,7 @@
 
 **a. Initial design**
 
+- Three core user actions in my design were: add a pet, schedule a task, and view today's tasks.
 - The initial UML used four classes: Owner, Pet, Task, and Scheduler.
 - Owner was responsible for storing multiple pets and exposing all pet tasks.
 - Pet held basic pet metadata and a list of tasks.
@@ -42,6 +43,7 @@
 - I used AI to accelerate class scaffolding, refine scheduler method structure, and draft test cases.
 - AI was also helpful for quickly validating implementation sequencing: logic layer first, then CLI demo, then Streamlit wiring.
 - The most helpful prompts were specific and code-scoped, for example asking how Scheduler should retrieve all tasks from Owner/Pet relationships.
+- Using separate chat sessions for design, algorithmic work, and testing helped me stay organized and reduced context mixing between phases.
 
 **b. Judgment and verification**
 

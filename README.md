@@ -76,7 +76,7 @@ Confidence Level: 4/5 stars.
 
 ## UML (Final)
 
-Final Mermaid source is stored in `uml_final.mmd`.
+Final Mermaid source is stored in `uml_final.mmd` and exported image is saved as `uml_final.png`.
 
 ```mermaid
 classDiagram

@@ -129,8 +129,4 @@ classDiagram
 
 ## Demo
 
-Add your final Streamlit screenshot in this section using your course image path when available.
-
-```html
-<a href="/course_images/ai110/your_screenshot_name.png" target="_blank"><img src='/course_images/ai110/your_screenshot_name.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
-```
+![App screenshot](pawpal.png)

@@ -4,13 +4,18 @@
 
 **a. Initial design**
 
-- Briefly describe your initial UML design.
-- What classes did you include, and what responsibilities did you assign to each?
+- The initial UML used four classes: Owner, Pet, Task, and Scheduler.
+- Owner was responsible for storing multiple pets and exposing all pet tasks.
+- Pet held basic pet metadata and a list of tasks.
+- Task represented a single scheduled item with a description, time, frequency, and completion status.
+- Scheduler handled cross-pet scheduling logic, including sorting, filtering, and schedule generation.
 
 **b. Design changes**
 
-- Did your design change during implementation?
-- If yes, describe at least one change and why you made it.
+- Yes, the design evolved during implementation.
+- I added `due_date` and `priority` to Task so the app could support recurrence and richer sorting.
+- I also added a `to_dict()` helper to simplify Streamlit table rendering and keep UI code cleaner.
+- Scheduler gained a dedicated `mark_task_complete()` flow that creates the next recurring task for daily/weekly items.
 
 ---
 
@@ -18,13 +23,15 @@
 
 **a. Constraints and priorities**
 
-- What constraints does your scheduler consider (for example: time, priority, preferences)?
-- How did you decide which constraints mattered most?
+- The scheduler considers due date, HH:MM time, task completion state, pet name filters, and priority.
+- I prioritized date/time ordering first because users usually think in calendar order.
+- I treated priority as a secondary ordering factor and recurrence as a completion-time behavior rather than a ranking rule.
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+- The conflict detector checks only exact date/time collisions and does not model overlapping durations.
+- This tradeoff keeps the implementation lightweight and easy to reason about while still surfacing the most obvious scheduling mistakes.
+- For this project scope, exact-match collision warnings provide useful value without overcomplicating the data model.
 
 ---
 
@@ -32,13 +39,15 @@
 
 **a. How you used AI**
 
-- How did you use AI tools during this project (for example: design brainstorming, debugging, refactoring)?
-- What kinds of prompts or questions were most helpful?
+- I used AI to accelerate class scaffolding, refine scheduler method structure, and draft test cases.
+- AI was also helpful for quickly validating implementation sequencing: logic layer first, then CLI demo, then Streamlit wiring.
+- The most helpful prompts were specific and code-scoped, for example asking how Scheduler should retrieve all tasks from Owner/Pet relationships.
 
 **b. Judgment and verification**
 
-- Describe one moment where you did not accept an AI suggestion as-is.
-- How did you evaluate or verify what the AI suggested?
+- I rejected a more complex conflict strategy that required task durations and overlap windows.
+- I kept exact-time conflict detection because it matched project requirements better and avoided unnecessary complexity.
+- I verified decisions by running a CLI demo and automated tests to confirm behavior remained correct.
 
 ---
 
@@ -46,13 +55,14 @@
 
 **a. What you tested**
 
-- What behaviors did you test?
-- Why were these tests important?
+- I tested task completion state updates, pet task addition, time sorting order, daily recurrence generation, and conflict detection.
+- These tests covered both baseline object behavior and scheduler intelligence features.
+- They were important because they validate core interactions between classes and prevent regressions in algorithmic logic.
 
 **b. Confidence**
 
-- How confident are you that your scheduler works correctly?
-- What edge cases would you test next if you had more time?
+- I am reasonably confident (4/5) that the scheduler works for the project scope.
+- Next edge cases to test would include invalid time formats, duplicate pets with similar names, large task lists, and weekly recurrence around month/year boundaries.
 
 ---
 
@@ -60,12 +70,14 @@
 
 **a. What went well**
 
-- What part of this project are you most satisfied with?
+- The strongest outcome was the clear separation between backend logic and UI. The CLI-first workflow made debugging simpler before Streamlit integration.
 
 **b. What you would improve**
 
-- If you had another iteration, what would you improve or redesign?
+- I would add JSON persistence and richer conflict handling based on task duration.
+- I would also add editing/deleting tasks from the UI to support a full lifecycle.
 
 **c. Key takeaway**
 
-- What is one important thing you learned about designing systems or working with AI on this project?
+- The key lesson was that AI is most effective when the human defines architecture boundaries first.
+- Acting as the lead architect means accepting AI speed benefits while still verifying each design choice against requirements and readability.
